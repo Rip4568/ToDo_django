@@ -26,22 +26,27 @@
   <div class="col-5 mt-5">
     {% for task in tasks %}
       <div class="card mb-1">
-        <div class="card-body">
-          {{task.titulo}}
-          <button type="button" class="close" aria-label="Close" data-dismiss="modal">
+        <div class="card-body row">
+          
+          <div class="container">
+            <div class="row">
+              <p class="col-8">{{task.titulo}}</p>
+              <p><p><a name="" id="" class="btn sm-button btn-outline-danger" href="{% url 'Task_app:deletar_task' task.pk %}" role="button">Deletar Task</a></p></p>
+            </div>
+          </div>
+          
+          {% comment %} <button type="button" onclick="{% url 'Task_app:deletar_task' task.pk %}" class="close" aria-label="Close" data-dismiss="modal">
             <span aria-hidden="true">&times;</span>
-          </button>
+          </button> {% endcomment %}
         </div>
       </div>
     {% endfor %}
   </div>
+
+  {% comment %} {{request.META.HTTP_COOKIE}} DA PRA USAR {% endcomment %}
 {% endblock content %}
 
 
 {% block loadScript %}
-<script>
-  //window.document.body.querySelector('input#id_titulo').focus()
-  //Caso não consiga ativar os arquivos estaticos deixar o script dentro da pagina
-</script>
   <script src="{% static 'js/script_task.js' %}"></script>
 {% endblock loadScript %}

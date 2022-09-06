@@ -11,7 +11,7 @@ class TaskTemplateView(TemplateView):
 class TaskView(View):
     def get(self, request, *args, **kwargs):
         form = TaskForm()
-        tasks = Task.objects.all()
+        tasks = Task.objects.all().order_by('criado_em')
         context = {
             'request':request,
             'form':form,
@@ -27,3 +27,7 @@ class TaskView(View):
             return redirect('Task_app:home')
         else:
             return redirect('Task_app:home')
+
+def deletar_task(request,task_id):
+    Task.objects.filter(pk=task_id).delete()
+    return redirect('Task_app:home')
